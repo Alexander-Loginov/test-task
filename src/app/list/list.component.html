@@ -13,6 +13,16 @@
       <div>Price filter</div>
       <input type="text" max="50" formControlName="price"/>
     </div>
+    <div>
+      <div>
+        <div [class.active]="isActiveSort('price', 'asc')" (click)="sortPrice('asc', 'price')">&uarr; price</div>
+        <div [class.active]="isActiveSort('price', 'desc')" (click)="sortPrice('desc', 'price')">&darr; price</div>
+      </div>
+      <div>
+        <div [class.active]="isActiveSort('name', 'asc')" (click)="sortPrice('asc', 'name')">&uarr; name</div>
+        <div [class.active]="isActiveSort('name', 'desc')" (click)="sortPrice('desc', 'name')">&darr; name</div>
+      </div>
+    </div>
   </div>
   <div class="list-table">
     <div class="list-element" *ngFor="let item of tariffs$ | async; let i = index">
@@ -28,3 +38,4 @@
       </div>
     </div>
   </div>
+</div>
