@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {ITariff} from './models/tarif-interface.model';
 import {ApiService} from './services/api.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {v} from '@angular/core/src/render3';
+import {Observable, Observer, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -10,22 +12,19 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
   styleUrls: ['./list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListComponent implements OnInit {
-  public tariffs: ITariff[];
+export class ListComponent implements OnInit, OnDestroy {
+  public tariffs$: Observable<ITariff[]>;
   public filtersForm: FormGroup;
   private sort = {
     way: 'asc',
     field: 'name'
   };
-  private filter;
+  private filterSubscriber: Subscription;
 
   constructor(private service: ApiService, private fb: FormBuilder) { }
 
   public ngOnInit(): void {
-    this.service.getTariff(this.sort)
-      .subscribe((data) => {
-        this.tariffs = data;
-      });
+    this.tariffs$ = this.service.getTariff(this.sort);
     this.initializeFilters();
     this.initListeners();
   }
@@ -34,20 +33,21 @@ export class ListComponent implements OnInit {
   }
 
   private initListeners() {
-    this.filtersForm.valueChanges
-      .pipe(
-        debounceTime(400),
-        distinctUntilChanged(),
-      )
+    this.filterSubscriber = this.filtersForm.valueChanges
       .subscribe(() => {
-        this.filtersForm.getRawValue();
-      })
+        this.tariffs$ = this.service.getTariff(this.sort, this.filtersForm.getRawValue());
+      });
+  }
 
+  public ngOnDestroy(): void {
+    this.filterSubscriber.unsubscribe();
   }
 
   private initializeFilters(): void {
     this.filtersForm = this.fb.group({
-      name: ['']
+      name: [''],
+      downloadSpeed: [''],
+      price: ['']
     });
   }
 }

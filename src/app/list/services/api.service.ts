@@ -15,8 +15,10 @@ export class ApiService {
     return of(data);
   }
 
-  private filter(data: ITariff[], filterData: string): ITariff[] {
-    return data;
+  private filter(data: ITariff[], filterData: any): ITariff[] {
+    return data.filter(item => {
+      return filterData ? Object.keys(filterData).some(key => filterData[key] && item[key].includes(filterData[key])) : true;
+    });
   }
 
   private sort(data: ITariff[], sortData: any): ITariff[] {
