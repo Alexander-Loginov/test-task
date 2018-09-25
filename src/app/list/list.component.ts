@@ -39,7 +39,7 @@ export class ListComponent extends DestructorComponent
   public seeMore(): void {}
 
   private initListeners() {
-    this.filterSubscriber = this.filtersForm.valueChanges
+    this.filtersForm.valueChanges
       .pipe(takeUntil(this.unsubscriber$))
       .subscribe(() => {
         this.tariffs$ = this.service.getTariff(
