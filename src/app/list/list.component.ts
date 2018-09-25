@@ -2,9 +2,9 @@ import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/co
 import {ITariff} from './models/tarif-interface.model';
 import {ApiService} from './services/api.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
-import {v} from '@angular/core/src/render3';
-import {Observable, Observer, Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {DestructorComponent} from './destructor/destructor.component';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-list',
@@ -12,7 +12,7 @@ import {Observable, Observer, Subscription} from 'rxjs';
   styleUrls: ['./list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent extends DestructorComponent implements OnInit, OnDestroy {
   public tariffs$: Observable<ITariff[]>;
   public filtersForm: FormGroup;
   private sort = {
@@ -21,7 +21,9 @@ export class ListComponent implements OnInit, OnDestroy {
   };
   private filterSubscriber: Subscription;
 
-  constructor(private service: ApiService, private fb: FormBuilder) { }
+  constructor(private service: ApiService, private fb: FormBuilder) {
+    super();
+  }
 
   public ngOnInit(): void {
     this.tariffs$ = this.service.getTariff(this.sort);
@@ -34,6 +36,9 @@ export class ListComponent implements OnInit, OnDestroy {
 
   private initListeners() {
     this.filterSubscriber = this.filtersForm.valueChanges
+      .pipe(
+        takeUntil(this.unsubscriber$)
+      )
       .subscribe(() => {
         this.tariffs$ = this.service.getTariff(this.sort, this.filtersForm.getRawValue());
       });
