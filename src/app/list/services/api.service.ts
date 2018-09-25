@@ -10,10 +10,6 @@ export class ApiService {
 
   constructor() { }
 
-  public updateTariff(): void {
-
-  }
-
   public getTariff(sortData = { way: 'asc', field: 'name' }, filterData?): Observable<ITariff[]> {
     const data = this.sort(this.filter(TariffData, filterData), sortData);
     return of(data);
