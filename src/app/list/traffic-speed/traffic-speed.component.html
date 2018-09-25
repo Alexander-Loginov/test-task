@@ -1,19 +1,19 @@
 <div class="element-speed">
   <div class="download-speed">
+    <div class="describer">Download</div>
     <div class="wrapper">
       <div class="item">
-        <button>{{ tariffData.downloadSpeed }}
-          <i class="fa fa-long-arrow-right arrow1" aria-hidden="true"></i>
-        </button>
+        <div class="arrow-block">&darr;</div>
+        <div class="speed-info">{{ tariffData.downloadSpeed }}</div>
       </div>
     </div>
-    <div class="upload-speed">
-      <div class="wrapper">
-        <div class="item">
-          <button>{{ tariffData.uploadSpeed }}
-            <i class="fa fa-long-arrow-right arrow1" aria-hidden="true"></i>
-          </button>
-        </div>
+  </div>
+  <div class="upload-speed">
+    <div class="describer">Upload</div>
+    <div class="wrapper">
+      <div class="item">
+        <div class="arrow-block">&uarr;</div>
+        <div class="speed-info">{{ tariffData.uploadSpeed }}</div>
       </div>
     </div>
   </div>

@@ -20,11 +20,11 @@
       <div class="element-name">{{ item.name }}</div>
       <app-traffic-speed [tariffData]="item"></app-traffic-speed>
       <div class="element-benefits">
-        <div class="element-benefit" *ngFor="let benefit of item.benefits">{{ benefit }}</div>
+        <div class="element-benefit" *ngFor="let benefit of item.benefits">{{ benefit  }}</div>
       </div>
       <div class="element-price-action">
-        <div class="element-price">{{ item.price }}</div>
-        <button class="element-decide" (click)="seeMore()"></button>
+        <div class="element-price">{{ item.price | currency:'€' }}</div>
+        <button class="element-decide" (click)="seeMore()">To tariff ></button>
       </div>
     </div>
   </div>
