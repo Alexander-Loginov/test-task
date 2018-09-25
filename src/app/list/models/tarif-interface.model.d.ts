@@ -1,7 +1,7 @@
 export interface ITariff {
   name: string;
-  downloadSpeed: number;
-  uploadSpeed: number;
+  downloadSpeed: string;
+  uploadSpeed: string;
   benefits: string[];
-  price: number;
+  price: string;
 }
