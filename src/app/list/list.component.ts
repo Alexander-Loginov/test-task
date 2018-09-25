@@ -18,14 +18,13 @@ import { takeUntil } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent extends DestructorComponent
-  implements OnInit, OnDestroy {
+  implements OnInit {
   public tariffs$: Observable<ITariff[]>;
   public filtersForm: FormGroup;
   public sort = {
     way: 'asc',
     field: 'name'
   };
-  private filterSubscriber: Subscription;
 
   constructor(private service: ApiService, private fb: FormBuilder) {
     super();
@@ -48,10 +47,6 @@ export class ListComponent extends DestructorComponent
           this.filtersForm.getRawValue()
         );
       });
-  }
-
-  public ngOnDestroy(): void {
-    this.filterSubscriber.unsubscribe();
   }
 
   public sortPrice(way: string, field: string): void {
