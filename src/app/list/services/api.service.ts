@@ -1,0 +1,29 @@
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { ITariff } from '../models/tarif-interface.model';
+import { TariffData } from '../models/tarif.constant';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiService {
+
+  constructor() { }
+
+  public updateTariff(): void {
+
+  }
+
+  public getTariff(sortData = { way: 'asc', field: 'name' }, filterData?): Observable<ITariff[]> {
+    const data = this.sort(this.filter(TariffData, filterData), sortData);
+    return of(data);
+  }
+
+  private filter(data: ITariff[], filterData: string): ITariff[] {
+    return data;
+  }
+
+  private sort(data: ITariff[], sortData: any): ITariff[] {
+    return data;
+  }
+}

@@ -1,0 +1,190 @@
+.title {
+  color: #111;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 75px; font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+  text-align: right;
+}
+
+.list {
+  padding: 30px;
+  min-height: 100%;
+
+  &-table {
+  }
+
+  &-element {
+    border: 1px black solid;
+    margin: 20px 0;
+    display: flex;
+  }
+  &-filters {
+    display: flex;
+  }
+}
+
+.element {
+
+ &-number {
+   width: 20px;
+   text-align: center;
+   border: black 1px solid;
+   padding: 80px 0;
+ }
+
+  &-name {
+    padding: 40px 0 0 80px;
+  }
+
+  &-speed {
+    padding-left: 80px;
+  }
+
+  &-benefits {
+    display: block;
+  }
+
+  &-benefit {
+    margin-left: 30%;
+    &::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background-color: black;
+      border-radius: 50%;
+    }
+  }
+}
+
+input {
+
+  margin-top: 9px;
+  padding: 14px 24px 14px 12px;
+  border: 1px solid gray;
+  background: gainsboro no-repeat right 6px center;
+
+  &:hover:not(:focus) {
+    cursor: pointer;
+
+    border-bottom-color: white;
+  }
+
+  &::placeholder {
+    color: #b3b2b1;
+  }
+}
+
+.filter-wrapper {
+  display: block;
+  margin-right: 30px;
+
+  div {
+    color: #111;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 32px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.item {
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+  position: relative;
+}
+
+button {
+  border: 1px solid white;
+  background: white;
+  width: 100%;
+  padding: 15px;
+  border-radius: 3px;
+  color: blue;
+  transition: background 0.5s ease;
+}
+
+button:hover {
+  background: blue;
+  color: white;
+  font-weight: normal;
+}
+
+button:hover i {
+  color: white;
+}
+
+i {
+  color: blue;
+  margin-left: 20px;
+}
+
+.arrow1 {
+  animation: slide1 1s ease-in-out infinite;
+  margin-left: 9px;
+}
+
+.arrow2 {
+  animation: slide2 1s ease-in-out infinite;
+}
+
+.arrow3 {
+  transform-origin: 0% 50%;
+  animation: slide3 1s ease-in-out infinite;
+}
+
+.arrow4 {
+  transform-origin: 0% 50%;
+  animation: slide4 4s linear infinite;
+}
+
+@keyframes slide1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(10px, 0);
+  }
+}
+
+@keyframes slide2 {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(45deg);
+  }
+
+  50% {
+    transform: translate(10px, 10px) rotate(45deg);
+  }
+}
+
+@keyframes slide3 {
+  0%,
+  100% {
+    transform: rotate(-45deg);
+  }
+
+  50% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes slide4 {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

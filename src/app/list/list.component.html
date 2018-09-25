@@ -1,0 +1,49 @@
+<div class="list">
+  <div class="title">Verivox table</div>
+  <div class="list-filters" [formGroup]="filtersForm">
+    <div class="filter-wrapper">
+      <div>Name filter</div>
+      <input type="text" max="50" formControlName="name"/>
+    </div>
+    <div class="filter-wrapper">
+      <div>Other filter</div>
+      <input type="text" max="50" formControlName="name"/>
+    </div>
+    <div class="filter-wrapper">
+      <div>Another filter</div>
+      <input type="text" max="50" formControlName="name"/>
+    </div>
+  </div>
+  <div class="list-table">
+    <div class="list-element" *ngFor="let item of tariffs; let i = index">
+      <div class="element-number">{{ i }}</div>
+      <div class="element-name">{{ item.name }}</div>
+      <div class="element-speed">
+        <div class="download-speed">
+          <div class="wrapper">
+            <div class="item">
+              <button>{{ item.downloadSpeed }}
+                <i class="fa fa-long-arrow-right arrow1" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div class="upload-speed">
+            <div class="wrapper">
+              <div class="item">
+                <button>{{ item.uploadSpeed }}
+                  <i class="fa fa-long-arrow-right arrow1" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="element-benefits">
+        <div class="element-benefit" *ngFor="let benefit of item.benefits">{{ benefit }}</div>
+      </div>
+      <div class="element-price-action">
+        <div class="element-price">{{ item.price }}</div>
+        <button class="element-decide" (click)="seeMore()"></button>
+      </div>
+    </div>
+  </div>
